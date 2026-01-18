@@ -1,0 +1,139 @@
+
+ WERT: 4
+de has no final positioning: 3
+set e left 
+de has no final positioning: 3
+set e right: 0x56184927eb18 w: 3
+de wert: 4
+found left d 
+right d is null e right: 0x56184927eb18 w 3
+ |||: 1 1 1 0 
+
+ WERT: 3
+de has no final positioning: 3
+set e left 
+de wert: 3
+found left d 
+de wert: 4
+check for loop:
+ left d: 0x56184927eb18
+ start right d: 0x56184927eb18
+ start left d: 0
+ start right d: 0
+ start left d: 0x56184927eb40
+loop detected!! 
+right d is null e right: 0x56184927eaf0 w 3
+ |||: 1 0 1 0 
+
+ WERT: 3
+de wert: 3
+found left d 
+de wert: 3
+de wert: 4
+check for loop:
+ left d: 0x56184927eaf0
+found right d
+ |||: 1 0 1 1 
+ ||| >> : 10101110 
+
+0: 
+ left: 1
+ right: 0
+ wert: 3
+ >right: 0x56184927eb40
+ >left: 0x56184927eb18 
+10
+1: 
+ left: 1
+ right: 1
+ wert: 4
+ >right: 0x56184927eb18
+ >left: 0x56184927eaf0 
+11
+2: 
+ left: 1
+ right: 0
+ wert: 3
+ >right: 0x56184927eaf0
+ >left: 0x56184927eb40 
+10
+3: 
+ left: 1
+ right: 0
+ wert: 3
+ >right: 0x56184927eb40
+ >left: 0x56184927eb18 
+10
+4: 
+ left: 1
+ right: 1
+ wert: 4
+ >right: 0x56184927eb18
+ >left: 0x56184927eaf0 
+11
+5: 
+ left: 1
+ right: 0
+ wert: 3
+ >right: 0x56184927eaf0
+ >left: 0x56184927eb40 
+10
+6: 
+ left: 1
+ right: 0
+ wert: 3
+ >right: 0x56184927eb40
+ >left: 0x56184927eb18 
+10
+7: 
+ left: 1
+ right: 1
+ wert: 4
+ >right: 0x56184927eb18
+ >left: 0x56184927eaf0 
+11
+8: 
+ left: 1
+ right: 0
+ wert: 3
+ >right: 0x56184927eaf0
+ >left: 0x56184927eb40 
+10
+9: 
+ left: 1
+ right: 0
+ wert: 3
+ >right: 0x56184927eb40
+ >left: 0x56184927eb18 
+10
+10: 
+ left: 1
+ right: 1
+ wert: 4
+ >right: 0x56184927eb18
+ >left: 0x56184927eaf0 
+11
+11: 
+ left: 1
+ right: 0
+ wert: 3
+ >right: 0x56184927eaf0
+ >left: 0x56184927eb40 
+10
+12: 
+ left: 1
+ right: 0
+ wert: 3
+ >right: 0x56184927eb40
+ >left: 0x56184927eb18 
+10
+13: 
+ left: 1
+ right: 1
+ wert: 4
+ >right: 0x56184927eb18
+ >left: 0x56184927eaf0 
+11
+
+3 3 4 
+2 Queries
