@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+#include <climits>
+#include <queue>
+#include <vector>
+#define ll long long
+
+using namespace std;
+
+struct node {
+  ll wight;
+  int node;
+  int cnode;
+  bool operator<(const struct node &x) { return wight < x.wight; }
+};
+
+int main() {
+  int n, m;
+  cin >> n >> m;
+  vector<vector<pair<int, int>>> g(n + 5);
+  vector<node> dg(n + 5);
+  for (int i = 1; i <= n; i++) {
+    if (i == 1) {
+      dg[i].wight = 0;
+    } else {
+      dg[i].wight = -LONG_LONG_MAX;
+    }
+    dg[i].node = i;
+    dg[i].cnode = -1;
+  }
+  priority_queue<pair<ll, int>> pq;
+  vector<bool> fix(n + 5);
+
+  for (int i = 1; i <= m; i++) {
+    int a, b, w;
+    cin >> a >> b >> w;
+    g[a].push_back({w, b});
+    g[b].push_back({w, a});
+  }
+
+  pq.push({0, 1});
+
+  int res = INT_MAX;
+  while (!pq.empty()) {
+    pair<ll, int> i = pq.top();
+    pq.pop();
+    if (fix[i.second])
+      continue;
+    if (i.second == n - 1) {
+      res = i.first;
+      break;
+    }
+    fix[i.second] = true;
+    for (auto &e : g[i.second]) {
+      if (fix[e.second]) {
+        continue;
+      }
+      if (dg[e.second].wight < dg[i.second].wight + e.first) {
+        dg[e.second].wight = (-dg[i.second].wight) + e.first;
+        dg[e.second].cnode = i.second;
+        pq.push({dg[e.second].wight, dg[e.second].node});
+      }
+    }
+  }
+
+  cout << res << "\n";
+
+  int i = n;
+  while (i != -1) {
+    cout << n << " ";
+    i = dg[i].cnode;
+  }
+}

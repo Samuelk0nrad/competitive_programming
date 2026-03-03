@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <vector>
 
 using namespace std;
 
@@ -10,20 +9,36 @@ int main() {
   int n;
   cin >> n;
 
-  vector<int> a(n);
-  vector<int> dp(n + 5, 0);
-  dp[0] = 1;
+  vector<int> dp(n + 5, INT_MAX);
+
+  int mr = 1;
 
   for (int i = 0; i < n; i++) {
-    cin >> a[i];
-    int ms = 1;
-    for (int j = 0; j < i; j++) {
-      if (a[j] < a[i]) {
-        ms = max(ms, dp[j] + 1);
+    int e;
+    cin >> e;
+
+    bool found = false;
+
+    int r = mr;
+    int l = 0;
+    while (r > l) {
+      int m = (r - l) / 2 + l; // 5 6 1: 12 => 6
+      if (dp[m] == e) {
+        found = true;
+      }
+      if (dp[m] > e) {
+        r = m;
+      } else {
+        l = m + 1;
       }
     }
-    dp[i] = ms;
+    if (!found) {
+      if (dp[r] == INT_MAX) {
+        mr++;
+      }
+      dp[r] = e;
+    }
   }
 
-  cout << dp[n - 1];
+  cout << mr - 1;
 }
