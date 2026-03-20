@@ -1,14 +1,16 @@
 #include <bits/stdc++.h>
+#include <cstdio>
 
 using namespace std;
 
 int main() {
+  freopen("mixmilk.in", "r", stdin);
   int c[4];
   int m[4];
 
-  cin >> c[1] >> m[1];
-  cin >> c[2] >> m[2];
-  cin >> c[3] >> m[3];
+  scanf("%d %d", &c[1], &m[1]);
+  scanf("%d %d", &c[2], &m[2]);
+  scanf("%d %d", &c[3], &m[3]);
 
   int from = 1, to = 2;
   for (int i = 0; i < 100; i++) {
@@ -21,11 +23,12 @@ int main() {
     }
     from++;
     to++;
-    if (from == 3) {
+    if (from > 3) {
       from = 1;
-    } else if (to == 3) {
-      from = 1;
+    } else if (to > 3) {
+      to = 1;
     }
   }
-  cout << m[1] << " " << m[2] << " " << m[3];
+  freopen("mixmilk.out", "w", stdout);
+  cout << m[1] << "\n" << m[2] << "\n" << m[3];
 }
