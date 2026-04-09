@@ -18,18 +18,18 @@ Node comp(const Node &l, const Node &r) {
   Node res = Node{{}, 0};
   Troll last;
   for (auto t : l.a) {
-    if (t.h > last.h) {
+    if (t.s > last.s) {
       res.a.push_back(t);
       last = t;
-      res.d += t.s;
+      res.d += t.h;
     }
   }
 
   for (auto t : r.a) {
-    if (t.h > last.h) {
+    if (t.s > last.s) {
       res.a.push_back(t);
       last = t;
-      res.d += t.s;
+      res.d += t.h;
     }
   }
   return res;
@@ -78,9 +78,9 @@ Q query(int p, int l, int r, int d, int k, int h) {
     int cd = 0;
     int lh = h;
     for (auto t : sg[p].a) {
-      if (t.h >= lh) {
-        d += t.s;
-        lh = t.h;
+      if (t.s >= lh) {
+        d += t.h;
+        lh = t.s;
       }
     }
     return Q{
