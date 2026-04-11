@@ -8,11 +8,10 @@
 #include <iostream>
 
 using namespace std;
+vector<int> r;
 
-std::vector<int> calculate(std::vector<int> towers, int bomb,
-                           std::vector<query> queries) {
-  int n = towers.size();
-  vector<int> r(n);
+void build(int n, vector<int> &towers, int bomb) {
+  r.resize(n);
   vector<int> t = towers;
   int li = bomb - 1;
   int ri = bomb + 1;
@@ -31,6 +30,11 @@ std::vector<int> calculate(std::vector<int> towers, int bomb,
       break;
     }
   }
+}
+
+std::vector<int> calculate(std::vector<int> towers, int bomb,
+                           std::vector<query> queries) {
+  int n = towers.size();
   vector<int> result;
   for (query q : queries) {
     if (q.type == ENHANCE) {
