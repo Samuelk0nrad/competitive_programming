@@ -5,6 +5,19 @@ using namespace std;
 int g[505][505];
 int p[505][505];
 
+int sum(int x, int y, int m) {
+  int v = p[x][y];
+  if (x - m < 0 && y - m < 0) {
+    return v;
+  } else if (x - m < 0) {
+    return v - p[x][y - m];
+  } else if (y - m < 0) {
+    return v - p[x - m][y];
+  } else {
+    return ((v - p[x][y - m]) - p[x - m][y]) + p[x - m][y - m];
+  }
+}
+
 int main() {
   std::cin.tie(0)->sync_with_stdio(false);
   int w, n, m;
@@ -40,46 +53,27 @@ int main() {
     for (int y = 0; y < w; y++) {
       int v = p[x][y];
 
-      for (int i = 1; i <= min(y, x) + 1; i++) {
-        if (x - i < 0 && y - i < 0) {
-          int sum = v;
-          if (sum <= m) {
-            if (res.second < sum) {
-              res = {i, sum};
-            } else if (res.second == sum) {
-              res.first = min(i, res.first);
-            }
-          }
-          continue;
-        } else if (x - i < 0) {
-          int sum = v - p[x][y - i];
-          if (sum <= m) {
-            if (res.second < sum) {
-              res = {i, sum};
-            } else if (res.second == sum) {
-              res.first = min(i, res.first);
-            }
-          }
-          continue;
-        } else if (y - i < 0) {
-          int sum = v - p[x - i][y];
-          if (sum <= m) {
-            if (res.second < sum) {
-              res = {i, sum};
-            } else if (res.second == sum) {
-              res.first = min(i, res.first);
-            }
-          }
-          continue;
+      int l = 1;
+      int r = min(y, x) + 2;
+      while (l != r - 1) {
+        int p = (r - l) / 2 + l;
+        int s = sum(x, y, p);
+
+        if (s == m) {
+          l = p;
+          r = p - 1;
+        } else if (s > m) {
+          r = p - 1;
+        } else {
+          l = p;
         }
-        int sum = ((v - p[x][y - i]) - p[x - i][y]) + p[x - i][y - i];
-        if (sum <= m) {
-          if (res.second < sum) {
-            res = {i, sum};
-          } else if (res.second == sum) {
-            res.first = min(i, res.first);
-          }
-        }
+      }
+
+      int s = sum(x, y, l);
+      if (res.second < s) {
+        res = {l, s};
+      } else if (res.second == s) {
+        res.first = min(l, res.first);
       }
     }
   }
