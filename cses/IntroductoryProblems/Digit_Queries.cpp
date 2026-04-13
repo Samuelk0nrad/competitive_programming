@@ -5,38 +5,38 @@
 
 using namespace std;
 
-void solve(ll k) {
-  ll r = k;
-  char res = 0;
-  ll t = 1;
-  for (int i = 1; true; ++i) {
-    ll z = pow(10l, i - 1);
-    ll p = (pow(10l, i) - t) * i;
-    if (p < r) {
-      r -= p;
-      t = p;
-      continue;
-    }
-
-    ll m = (r - 1) / i;
-    ll f = m + z;
-
-    string s = to_string(f);
-
-    res = s[(r - 1) % i];
-
-    t = p;
-    break;
-  }
-  cout << res << "\n";
-}
+ll pw[18];
 
 int main() {
   ll q;
   cin >> q;
-  for (int i = 0; i < q; ++i) {
-    ll k;
+  ll k;
+  pw[0] = 1;
+
+  for (int i = 1; i < 18; i++)
+    pw[i] = pw[i - 1] * 10;
+
+  while (q--) {
     cin >> k;
-    solve(k);
+    for (int d = 1; d < 100; d++) {
+      ll e = pw[d] - 1;
+      ll s = pw[d - 1];
+      ll c = (e - (s - 1)) * d;
+
+      if (c < k) {
+        k -= c;
+        continue;
+      }
+
+      ll numb = ((k - 1) / d) + s;
+      ll p = abs(((k - 1) % d) - (d - 1));
+
+      ll h = numb % pw[p + 1];
+      ll l = numb % pw[p];
+      ll res = (h - l) / pw[p];
+
+      cout << res << "\n";
+      break;
+    }
   }
 }
